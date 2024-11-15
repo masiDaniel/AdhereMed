@@ -18,7 +18,7 @@ class PrescriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Prescription
-        fields = ['id', 'doctor', 'patient', 'instructions', 'diagnosis', 'prescribed_medications']
+        fields = "__all__"
         read_only_fields = ['id', 'created_at']
 
     def create(self, validated_data):
