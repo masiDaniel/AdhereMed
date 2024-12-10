@@ -58,6 +58,7 @@ class PrescribedMedication {
   final bool? afternoon;
   final bool? evening;
   final int? duration;
+  final DateTime? startDate;
 
   PrescribedMedication({
     required this.prescribedMedicationId,
@@ -69,6 +70,7 @@ class PrescribedMedication {
     required this.afternoon,
     required this.evening,
     required this.duration,
+    required this.startDate,
   });
 
   factory PrescribedMedication.fromJson(Map<String, dynamic> json) {
@@ -83,6 +85,9 @@ class PrescribedMedication {
         afternoon: json['afternoon'] as bool?,
         evening: json['evening'] as bool?,
         duration: json['duration'] as int?,
+        startDate: json['start_date'] != null
+            ? DateTime.parse(json['start_date'])
+            : null,
       );
     } catch (e) {
       print('Error parsing medicine details: $e');
@@ -97,6 +102,7 @@ class PrescribedMedication {
         afternoon: false,
         evening: false,
         duration: 0,
+        startDate: null,
       );
     }
   }

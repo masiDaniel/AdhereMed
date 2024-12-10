@@ -5,7 +5,7 @@ import 'package:version_0/services/post_prescription_service.dart';
 import 'package:version_0/services/user_log_in_service.dart';
 import 'package:version_0/services/user_log_out_service.dart';
 import 'package:version_0/views/Doctors/medication_prescription.dart';
-import 'package:version_0/views/prescription_form.dart';
+import 'package:version_0/views/Doctors/prescription_form.dart';
 import 'package:intl/intl.dart';
 
 ///
@@ -44,13 +44,17 @@ class _DoctorsPageState extends State<DoctorsPage> {
   }
 
   String greet() {
-    var hour = DateTime.now().hour;
-    if (hour < 12) {
-      return 'Good morning';
-    } else if (hour < 18) {
-      return 'Good afternoon';
+    final now = DateTime.now();
+    final hour = now.hour;
+
+    if (hour >= 5 && hour < 12) {
+      return 'Good Morning';
+    } else if (hour >= 12 && hour < 18) {
+      return 'Good Afternoon';
+    } else if (hour >= 18 && hour < 22) {
+      return 'Good Evening';
     } else {
-      return 'Good evening';
+      return 'Good Night';
     }
   }
 
@@ -67,50 +71,55 @@ class _DoctorsPageState extends State<DoctorsPage> {
             const SizedBox(
               height: 50,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 70,
-                  height: 70,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: AssetImage(
-                            'assets/images/splash.png',
-                          ),
-                          fit: BoxFit.cover)),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  formattedDate,
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                const Icon(
-                  Icons.calendar_today,
-                  size: 30, // adjust the size as needed
-                  color: Colors.blue, // adjust the color as needed
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 70,
+                    height: 70,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: AssetImage(
+                              'assets/images/splash.png',
+                            ),
+                            fit: BoxFit.cover)),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    '${greet()}, \nDr. $firstName',
+                    style: const TextStyle(
+                        fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  Text(
+                    formattedDate,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  const Icon(
+                    Icons.calendar_today,
+                    size: 30, // adjust the size as needed
+                    color: Colors.blue, // adjust the color as needed
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '${greet()}, Dr. $firstName',
-                  style: const TextStyle(
-                      fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-              ],
+              children: [],
             ),
             const SizedBox(
               height: 10,

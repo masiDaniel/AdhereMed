@@ -343,7 +343,8 @@ class _PrescriptionDetailPageState extends State<PrescriptionDetailPage> {
                                             TextFormField(
                                               onChanged: (value) {
                                                 setState(() {
-                                                  duration = value as int;
+                                                  duration =
+                                                      int.tryParse(value) ?? 0;
                                                 });
                                               },
                                               decoration: const InputDecoration(

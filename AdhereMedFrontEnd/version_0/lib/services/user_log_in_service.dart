@@ -11,6 +11,8 @@ String? firstName;
 String? imageUrl;
 String? userType;
 int? userId;
+int activeUserId = 0;
+String? activeuserProfile;
 
 Future fetchUserSignIn(String username, String password) async {
   try {
@@ -28,11 +30,13 @@ Future fetchUserSignIn(String username, String password) async {
       final token = userData['token'];
       final first_name = userData['first_name'];
       final currentUserId = userData['user_id'];
+      activeuserProfile = userData['profile_picture'];
       userId = currentUserId;
       userType = userData['user_type'];
       // imageUrl = userData['profile_pic'];
       authToken = token;
       firstName = first_name;
+      activeUserId = currentUserId;
       print(userId);
 
       return UserLogin.fromJson(userData);

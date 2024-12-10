@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:version_0/services/local_notification_service.dart';
 import 'package:version_0/views/Doctors/Doctors_view.dart';
+import 'package:version_0/views/patients/bottom_nav_bar.dart';
 import 'package:version_0/views/patients/home_page.dart';
-import 'package:version_0/views/landing_page.dart';
-import 'package:version_0/views/prescription_form.dart';
+import 'package:version_0/views/Shared_pages/landing_page.dart';
+import 'package:version_0/views/Doctors/prescription_form.dart';
 import 'package:version_0/views/profile_page.dart';
-import 'package:version_0/views/sign_in.dart';
-import 'package:version_0/views/sign_up.dart';
+import 'package:version_0/views/Shared_pages/sign_in.dart';
+import 'package:version_0/views/Shared_pages/sign_up.dart';
 import 'package:version_0/views/Doctors/doctor_sign_up.dart';
-import 'package:version_0/views/splash_screen.dart';
+import 'package:version_0/views/Shared_pages/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalNotificationService.initialize(); // Initialize the notifications
   runApp(const MyApp());
 }
 
@@ -32,6 +36,7 @@ class MyApp extends StatelessWidget {
         '/landingpage': (context) => const landingPage(),
         '/doctorspage': (context) => const DoctorsPage(),
         '/doctorSignUp': (context) => const doctorSignUpPage(),
+        '/mainnavpage': (context) => const MainNavigationPage(),
       },
       debugShowCheckedModeBanner: false,
     );

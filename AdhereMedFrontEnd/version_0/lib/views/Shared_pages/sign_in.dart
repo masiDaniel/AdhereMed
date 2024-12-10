@@ -34,7 +34,7 @@ class _LogInPageState extends State<LogInPage> {
       if (userlogin != null) {
         //navigate to the homepage screen if sign in is succesfull
         if (userType == "patient") {
-          Navigator.pushNamed(context, '/home');
+          Navigator.pushNamed(context, '/mainnavpage');
         } else if (userType == "doctor") {
           Navigator.pushNamed(context, '/doctorspage');
         }

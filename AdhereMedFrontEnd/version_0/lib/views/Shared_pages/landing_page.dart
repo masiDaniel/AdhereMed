@@ -32,7 +32,7 @@ class landingPage extends StatelessWidget {
             Text(
               'A trusted',
               style: GoogleFonts.dmSerifDisplay(
-                  fontSize: 50, color: const Color.fromARGB(255, 6, 148, 177)),
+                  fontSize: 50, color: const Color(0xFF0694B1)),
             ),
             Text(
               'Medical Service Platform.',
