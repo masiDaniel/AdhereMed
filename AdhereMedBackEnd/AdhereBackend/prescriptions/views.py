@@ -3,8 +3,8 @@ from django.http import JsonResponse
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import MedicaionSerializer, PrescribedMedicationSerializer, PrescriptionSerializer, PrescribedMedication
-from .models import Medication, PrescribedMedication, Prescription
+from .serializers import MedicaionSerializer, PatientLogSerializer, PrescribedMedicationSerializer, PrescriptionSerializer, PrescribedMedication, ConsultationSerializer, CheckupSerializer
+from .models import Checkup, Consultation, Medication, PatientLog, PrescribedMedication, Prescription
 from django.core.files.base import ContentFile
 from base64 import b64decode
 
@@ -109,3 +109,48 @@ class PrescriptionList(generics.ListAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
+class PatientLogView(APIView):
+    # permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        logs = PatientLog.objects.filter(user=request.user).order_by('-timestamp')
+        serializer = PatientLogSerializer(logs, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = PatientLogSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ConsultationView(APIView):
+    # permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        constulations = Consultation.objects.filter(user=request.user)
+        serializer = ConsultationSerializer(constulations, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = ConsultationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class checkupView(APIView):
+    # permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        checkups = Checkup.objects.filter(user=request.user)
+        serializer = CheckupSerializer(checkups, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = CheckupSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

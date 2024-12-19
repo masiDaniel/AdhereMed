@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import Medication, PrescribedMedication, Prescription
+from .models import Medication, PatientLog, PrescribedMedication, Prescription, Checkup, Consultation
 
 
 class PrescribedMedicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = PrescribedMedication
-        fields = ['id', 'prescription', 'medication', 'dosage', 'instructions', 'morning', 'afternoon', 'evening', 'duration']
+        fields = ['id', 'prescription', 'medication', 'dosage', 'instructions', 'morning', 'afternoon', 'evening', 'duration', "start_date"]
 
     def create(self, validated_data):
         prescribedMeds = PrescribedMedication.objects.create(**validated_data)
@@ -39,4 +39,17 @@ class MedicaionSerializer(serializers.ModelSerializer):
         medication = Medication.objects.create(**validated_data)
         return medication
     
+class PatientLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PatientLog
+        fields = ['id', 'feeling', 'symptoms', 'timestamp']
 
+class ConsultationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Consultation
+        fields = '__all__'
+        
+class CheckupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Checkup
+        fields = ['symptoms', 'date', 'id', 'user', 'status']

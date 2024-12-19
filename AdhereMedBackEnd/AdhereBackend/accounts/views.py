@@ -6,7 +6,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import permission_classes
 from rest_framework import status
 from rest_framework.response import Response
-from .models import CustomUser
+from .models import CustomUser, Doctor
 
 # from rest_framework.authtoken.models import Token
 
@@ -126,5 +126,9 @@ class RegisterUsersAPIView(APIView):
             return Response({"message": message}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+class DoctorListView(APIView):
+    def get(self, request, *args, **kwargs):
+        doctors = Doctor.objects.all()  # Fetch all doctors
+        serializer = DoctorSerializer(doctors, many=True)  # Serialize the data
+        return Response(serializer.data, status=status.HTTP_200_OK)
 

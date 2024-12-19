@@ -6,19 +6,22 @@ class DoctorSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(source='user.id', read_only=True)
     first_name = serializers.CharField(source='user.first_name', read_only=True)
     last_name = serializers.CharField(source='user.last_name', read_only=True)
+    user_email = serializers.EmailField(source='user.email')
+    profile_picture = serializers.ImageField(source='user.profile_pic')
 
     class Meta:
         model = Doctor
-        fields = ['user_id','first_name', 'last_name','license_number', 'specialty', ]
+        fields = ['user_id','first_name', 'last_name','license_number', 'specialty', 'user_email', 'profile_picture']
 
 class PatientSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(source='user.id', read_only=True)
     first_name = serializers.CharField(source='user.first_name', read_only=True)
     last_name = serializers.CharField(source='user.last_name', read_only=True)
+    profile_picture = serializers.ImageField(source='user.profile_pic')
 
     class Meta:
         model = Patient
-        fields = ['user_id','first_name', 'last_name','identification_number', 'date_of_birth']
+        fields = ['user_id','first_name', 'last_name','identification_number', 'date_of_birth', 'profile_picture']
 
 
 class AccountSerializer(serializers.ModelSerializer): 
@@ -72,4 +75,5 @@ class MessageTokenSerializer(serializers.Serializer):
 
 class MessageSerializer(serializers.Serializer):
     message = serializers.CharField(max_length=100)
+
 
