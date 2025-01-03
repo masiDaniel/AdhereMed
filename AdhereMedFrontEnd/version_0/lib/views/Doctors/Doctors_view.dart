@@ -62,6 +62,7 @@ class _DoctorsPageState extends State<DoctorsPage> {
   Widget build(BuildContext context) {
     String formattedDate =
         DateFormat.yMMMMd().format(DateTime.now()); // format the current date
+    // can i do the same with time? is it necessary in the app?
 
     return Scaffold(
       body: SafeArea(
@@ -76,6 +77,8 @@ class _DoctorsPageState extends State<DoctorsPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  // why hasn't the profiie picture been handled?
+                  // when will it be handled?
                   Container(
                     width: 70,
                     height: 70,
@@ -103,27 +106,13 @@ class _DoctorsPageState extends State<DoctorsPage> {
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  const Icon(
-                    Icons.calendar_today,
-                    size: 30, // adjust the size as needed
-                    color: Colors.blue, // adjust the color as needed
-                  ),
                 ],
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+
             Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
               height: 70,
@@ -188,6 +177,17 @@ class _DoctorsPageState extends State<DoctorsPage> {
                   const SizedBox(
                     width: 20,
                   ),
+                  CustomButton(
+                      buttonText: "Consultations",
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PrescriptionFormPage()));
+                      },
+                      width: 160,
+                      height: 50,
+                      color: const Color(0xFF003A45)),
                 ],
               ),
             ),
@@ -304,11 +304,4 @@ class _DoctorsPageState extends State<DoctorsPage> {
       ),
     );
   }
-}
-
-class medicalData {
-  final String doctorName;
-  final int prescriptionCount;
-
-  medicalData(this.doctorName, this.prescriptionCount);
 }

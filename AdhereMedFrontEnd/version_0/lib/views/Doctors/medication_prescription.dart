@@ -18,9 +18,6 @@ class PrescriptionDetailPage extends StatefulWidget {
 }
 
 class _PrescriptionDetailPageState extends State<PrescriptionDetailPage> {
-  // late List<bool> isPressedMorning = [];
-  // late List<bool> isPressedAfternoon = [];
-  // late List<bool> isPressedEvening = [];
   bool isPressedMorning = false;
   bool isPressedAfternoon = false;
   bool isPressedEvening = false;
@@ -35,13 +32,14 @@ class _PrescriptionDetailPageState extends State<PrescriptionDetailPage> {
   void initState() {
     super.initState();
     fetchMedications();
-    // isPressedMorning =
-    //     List.generate(selectedMedicines.length, (index) => false);
-    // isPressedAfternoon =
-    //     List.generate(selectedMedicines.length, (index) => false);
-    // isPressedEvening =
-    //     List.generate(selectedMedicines.length, (index) => false);
   }
+
+  ///
+  ///how will i get the functions below to the respective files while ensuring that i have maintained,
+  /// or improved functionality.
+  ///
+  ///i also need to put below the submit a segment for the doctor to see the various medication already prescribed in that prescription
+  ///it will make more sense  to have them there.
 
   Map<String, String> headers = {
     "Content-Type": "application/json",
@@ -49,6 +47,7 @@ class _PrescriptionDetailPageState extends State<PrescriptionDetailPage> {
 
   Future<void> fetchMedications() async {
     // Make an HTTP GET request to fetch medications from the backend
+    // how will i handle the large amount of meication present in the world? whats the best way to handle this?
     try {
       final headersWithToken = {
         ...headers,
@@ -121,9 +120,6 @@ class _PrescriptionDetailPageState extends State<PrescriptionDetailPage> {
 
       setState(() {
         selectedMedicines.clear();
-        // isPressedMorning = false;
-        // isPressedAfternoon = false;
-        // isPressedEvening = false;
       });
 
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -144,9 +140,6 @@ class _PrescriptionDetailPageState extends State<PrescriptionDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('selectedMedicines length: ${selectedMedicines.length}');
-    // print('isPressedMorning length: ${isPressedMorning.length}');
-
     String baseUrl = 'http://127.0.0.1:8000';
     return Scaffold(
       appBar: AppBar(
@@ -362,15 +355,11 @@ class _PrescriptionDetailPageState extends State<PrescriptionDetailPage> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 children: [
+                                                  // the buttoms below need to be refactored, into a reusable component
+                                                  // also i need to handle the morning, afternoon and evening for each drug.
                                                   GestureDetector(
                                                     onTap: () {
                                                       setState(() {
-                                                        // Toggle the value of isPressed for the current medicine
-                                                        // isPressedMorning[
-                                                        //         index] =
-                                                        //     !isPressedMorning[
-                                                        //         index];
-
                                                         isPressedMorning =
                                                             !isPressedMorning;
                                                       });
